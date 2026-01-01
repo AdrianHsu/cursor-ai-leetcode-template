@@ -15,26 +15,24 @@ Output: [[1]]
 """
 
 class Solution:
+    def __init__(self):
+        self.results = []
+
     def combine(self, n, k):
-        """
-        Backtracking approach
-        Time Complexity: O(C(n,k) * k)
-        Space Complexity: O(k)
-        """
-        result = []
-        
-        def backtrack(start, current):
-            if len(current) == k:
-                result.append(current[:])
+        self.results = []
+
+        def backtrack(start, curr):
+            if len(curr) == k:
+                self.results.append(curr[:])
                 return
-            
+
             for i in range(start, n + 1):
-                current.append(i)
-                backtrack(i + 1, current)
-                current.pop()
-        
+                curr.append(i)
+                backtrack(i + 1, curr)
+                curr.pop()
+
         backtrack(1, [])
-        return result
+        return self.results
 
 # Test cases
 def test_combinations():

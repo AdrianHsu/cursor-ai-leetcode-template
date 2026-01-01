@@ -22,22 +22,22 @@ class Solution:
         Time Complexity: O(n)
         Space Complexity: O(1)
         """
-        left = 0
-        right = len(height) - 1
+
+        l = 0
+        r = len(height) - 1
         max_water = 0
-        
-        while left < right:
-            width = right - left
-            current_area = min(height[left], height[right]) * width
+
+        while l < r:
+            width = r - l
+            current_area = width * min(height[l], height[r])
             max_water = max(max_water, current_area)
-            
-            # Move pointer with smaller height
-            if height[left] < height[right]:
-                left += 1
+
+            if height[l] < height[r]:
+                l += 1
             else:
-                right -= 1
-        
+                r -= 1
         return max_water
+
 
 # Test cases
 def test_max_area():

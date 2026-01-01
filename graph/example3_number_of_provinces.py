@@ -18,27 +18,28 @@ Output: 3
 from collections import deque
 
 class Solution:
+    
     def findCircleNum(self, isConnected):
-        """
-        BFS approach
-        Time Complexity: O(n^2)
-        Space Complexity: O(n)
-        """
+    #     """
+    #     BFS approach
+    #     Time Complexity: O(n^2)
+    #     Space Complexity: O(n)
+    #     """
         n = len(isConnected)
         visited = [False] * n
         provinces = 0
-        
+
         def bfs(start):
             queue = deque([start])
             visited[start] = True
-            
+
             while queue:
                 city = queue.popleft()
                 for neighbor in range(n):
-                    if isConnected[city][neighbor] == 1 and not visited[neighbor]:
+                    if isConnected[city][neighbor] and not visited[neighbor]:
                         visited[neighbor] = True
                         queue.append(neighbor)
-        
+
         for i in range(n):
             if not visited[i]:
                 provinces += 1

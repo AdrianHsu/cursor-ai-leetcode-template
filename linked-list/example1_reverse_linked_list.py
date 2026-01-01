@@ -39,6 +39,7 @@ class Solution:
         
         return prev
 
+
 # Helper function to create linked list from list
 def create_linked_list(arr):
     if not arr:

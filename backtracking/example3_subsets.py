@@ -15,22 +15,24 @@ Output: [[],[0]]
 
 class Solution:
     def subsets(self, nums):
-        """
-        Backtracking approach
-        Time Complexity: O(2^n * n)
-        Space Complexity: O(n)
-        """
+    #     """
+    #     Backtracking approach
+    #     Time Complexity: O(2^n * n)
+    #     Space Complexity: O(n)
+    #     """"
         result = []
-        
-        def backtrack(start, current):
-            result.append(current[:])
+
+        def backtrack(nums, i, curr):
             
-            for i in range(start, len(nums)):
-                current.append(nums[i])
-                backtrack(i + 1, current)
-                current.pop()
-        
-        backtrack(0, [])
+            result.append(curr[:])
+
+            for i in range(i, len(nums)):
+                curr.append(nums[i])
+                backtrack(nums, i + 1, curr)
+                curr.pop()
+            return
+
+        backtrack(nums, 0, [])
         return result
 
 # Test cases

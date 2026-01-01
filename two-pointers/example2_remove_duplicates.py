@@ -33,6 +33,7 @@ class Solution:
         
         return slow + 1
 
+
 # Test cases
 def test_remove_duplicates():
     solution = Solution()

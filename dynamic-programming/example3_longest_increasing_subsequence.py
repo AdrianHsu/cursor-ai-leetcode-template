@@ -18,24 +18,24 @@ Output: 1
 """
 
 class Solution:
-    def lengthOfLIS(self, nums):
-        """
-        Dynamic Programming - Bottom Up
-        Time Complexity: O(n^2)
-        Space Complexity: O(n)
-        """
+
+    def lengthOfLIS(Self, nums):
+    #     """
+    #     Dynamic Programming - Bottom Up
+    #     Time Complexity: O(n^2)
+    #     Space Complexity: O(n)
+    #     """
         if not nums:
             return 0
-        
+
         n = len(nums)
-        dp = [1] * n  # dp[i] = length of LIS ending at index i
-        
+        # dp[i] = length of LIS ending at index i
+        dp = [1 for i in range(n)]
         for i in range(1, n):
             for j in range(i):
                 if nums[j] < nums[i]:
-                    dp[i] = max(dp[i], dp[j] + 1)
-        
-        return max(dp)
+                    dp[i] = max(dp[j] + 1, dp[i])
+        return dp[n - 1]
 
 # Test cases
 def test_length_of_lis():

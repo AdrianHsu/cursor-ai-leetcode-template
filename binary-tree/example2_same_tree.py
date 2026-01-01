@@ -26,19 +26,15 @@ class TreeNode:
 
 class Solution:
     def isSameTree(self, p, q):
-        """
-        Recursive DFS approach
-        Time Complexity: O(n)
-        Space Complexity: O(h) where h is height
-        """
         if not p and not q:
             return True
-        
-        if not p or not q:
+        elif not p and q:
             return False
-        
+        elif not q and p:
+            return False
+
         return (p.val == q.val and 
-                self.isSameTree(p.left, q.left) and 
+                self.isSameTree(p.left, q.left) and
                 self.isSameTree(p.right, q.right))
 
 # Helper function to create tree from list

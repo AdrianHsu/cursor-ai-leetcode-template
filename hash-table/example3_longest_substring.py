@@ -17,28 +17,66 @@ Example 3:
 Input: s = "pwwkew"
 Output: 3
 Explanation: The answer is "wke", with the length of 3.
+
+It is also a two pointer problem
 """
 
+from collections import defaultdict
 class Solution:
-    def lengthOfLongestSubstring(self, s):
-        """
-        Sliding window with hash map
-        Time Complexity: O(n)
-        Space Complexity: O(min(n, m)) where m is charset size
-        """
-        char_index = {}
-        left = 0
-        max_length = 0
+    # Solution 1
+    # def lengthOfLongestSubstring(self, s):
+    #     """
+    #     Sliding window with hash map
+    #     Time Complexity: O(n)
+    #     Space Complexity: O(min(n, m)) where m is charset size
+    #     """
+    #     char_index = {}
+    #     left = 0
+    #     max_length = 0
         
-        for right in range(len(s)):
-            # If character seen and within current window, move left pointer
-            if s[right] in char_index and char_index[s[right]] >= left:
-                left = char_index[s[right]] + 1
+    #     for right in range(len(s)):
+    #         # If character seen and within current window, move left pointer
+    #         if s[right] in char_index and char_index[s[right]] >= left:
+    #             left = char_index[s[right]] + 1
             
-            char_index[s[right]] = right
-            max_length = max(max_length, right - left + 1)
+    #         char_index[s[right]] = right
+    #         max_length = max(max_length, right - left + 1)
+        
+    #     return max_length
+    
+    # Solution 2
+    # def lengthOfLongestSubstring(self, s):
+    #     i, j = 0, 0
+        
+    #     char_index = defaultdict(list)
+    #     max_length = 0
+
+    #     for j in range(len(s)):
+    #         while s[j] in char_index and char_index[s[j]] != None:
+    #             char_index[s[i]] = None
+    #             i += 1
+    #         char_index[s[j]] = j
+    #         max_length = max(max_length, j - i + 1)
+        
+    #     return max_length
+
+
+    # Solution 3, most elegant 2-pointers
+    def lengthOfLongestSubstring(self, s):
+        i, j = 0, 0
+        
+        char_index = set()
+        max_length = 0
+
+        for j in range(len(s)):
+            while s[j] in char_index:
+                char_index.remove(s[i])
+                i += 1
+            char_index.add(s[j])
+            max_length = max(max_length, j - i + 1)
         
         return max_length
+
 
 # Test cases
 def test_longest_substring():

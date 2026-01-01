@@ -26,33 +26,31 @@ class TreeNode:
         self.right = right
 
 class Solution:
+    
     def levelOrder(self, root):
         """
         BFS using queue
         Time Complexity: O(n)
         Space Complexity: O(n)
         """
+
         if not root:
             return []
-        
         queue = deque([root])
         result = []
-        
+
         while queue:
             level_size = len(queue)
-            level = []
-            
-            for _ in range(level_size):
+            arr = []
+            for i in range(level_size):
                 node = queue.popleft()
-                level.append(node.val)
-                
+                arr.append(node.val)
                 if node.left:
                     queue.append(node.left)
                 if node.right:
                     queue.append(node.right)
-            
-            result.append(level)
-        
+            print(result)
+            result.append(arr)
         return result
 
 # Helper function to create tree from list

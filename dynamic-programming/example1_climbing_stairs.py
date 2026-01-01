@@ -21,24 +21,38 @@ Explanation: There are three ways to climb to the top.
 """
 
 class Solution:
+    # def climbStairs(self, n):
+    #     """
+    #     Dynamic Programming - Bottom Up
+    #     Time Complexity: O(n)
+    #     Space Complexity: O(1)
+    #     """
+    #     if n <= 2:
+    #         return n
+        
+    #     prev2 = 1  # ways to reach step 0
+    #     prev1 = 2  # ways to reach step 1
+        
+    #     for i in range(3, n + 1):
+    #         current = prev1 + prev2
+    #         prev2 = prev1
+    #         prev1 = current
+        
+    #     return prev1
+
     def climbStairs(self, n):
-        """
-        Dynamic Programming - Bottom Up
-        Time Complexity: O(n)
-        Space Complexity: O(1)
-        """
         if n <= 2:
             return n
         
-        prev2 = 1  # ways to reach step 0
-        prev1 = 2  # ways to reach step 1
-        
+        dp = [0 for i in range(n + 1)]
+        dp[0] = -1 # not used
+        dp[1] = 1
+        dp[2] = 2
+
         for i in range(3, n + 1):
-            current = prev1 + prev2
-            prev2 = prev1
-            prev1 = current
-        
-        return prev1
+            dp[i] = dp[i - 1] + dp[i - 2]
+
+        return dp[n]
 
 # Test cases
 def test_climb_stairs():

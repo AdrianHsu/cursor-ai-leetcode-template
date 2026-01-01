@@ -32,6 +32,7 @@ class Solution:
         
         return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
 
+
 # Helper function to create tree from list
 def create_tree(arr):
     if not arr:

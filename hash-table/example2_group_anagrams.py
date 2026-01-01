@@ -34,6 +34,7 @@ class Solution:
         
         return list(groups.values())
 
+
 # Test cases
 def test_group_anagrams():
     solution = Solution()

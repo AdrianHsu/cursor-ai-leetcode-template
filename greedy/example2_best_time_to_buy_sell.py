@@ -14,6 +14,9 @@ Example 2:
 Input: prices = [7,6,4,3,1]
 Output: 0
 Explanation: In this case, no transactions are done and the max profit = 0.
+
+My note:
+even if you see lower min price later in the array, you cannot do anything with a really high price you saw earlier. This is a straightforward greedy question as you only need to traverse one with pointers
 """
 
 class Solution:

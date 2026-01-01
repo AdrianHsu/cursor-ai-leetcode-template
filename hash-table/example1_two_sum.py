@@ -33,6 +33,7 @@ class Solution:
             seen[num] = i
         return []
 
+
 # Test cases
 def test_two_sum():
     solution = Solution()

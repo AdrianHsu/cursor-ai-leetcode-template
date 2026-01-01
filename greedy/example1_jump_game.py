@@ -13,6 +13,9 @@ Example 2:
 Input: nums = [3,2,1,0,4]
 Output: false
 Explanation: You will always arrive at index 3 no matter what. Its maximum jump length is 0, which makes it impossible to reach the last index.
+
+My Note: if [3,2,1,0,4] and at i = 0 we already know we can reach i = 3, then it does not matter whether from i = 0 if we can reach i = 1 or 2. The only thing we care next about is if we starts at i = 1 , or i = 2, etc, can we reach further than 3. Which is why we can use greedy
+smaller elements that come before a larger element will never be useful again.
 """
 
 class Solution:
@@ -32,7 +35,6 @@ class Solution:
                 return True
         
         return True
-
 # Test cases
 def test_jump_game():
     solution = Solution()

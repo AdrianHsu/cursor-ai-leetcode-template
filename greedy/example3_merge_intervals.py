@@ -17,6 +17,7 @@ Explanation: Intervals [1,4] and [4,5] are considered overlapping.
 class Solution:
     def merge(self, intervals):
         """
+        Remember to sort it first!
         Greedy approach: sort and merge overlapping intervals
         Time Complexity: O(n log n)
         Space Complexity: O(n)
@@ -34,8 +35,9 @@ class Solution:
             
             # If current overlaps with last, merge them
             if current[0] <= last[1]:
+                # modify values in-place
                 last[1] = max(last[1], current[1])
-            else:
+            else: # no intersect, then append separately
                 merged.append(current)
         
         return merged

@@ -70,6 +70,7 @@ def has_cycle(graph):
             if neighbor not in visited:
                 if dfs(neighbor, node):
                     return True
+            # neighbor has been visited, and it is not parent.
             elif neighbor != parent:
                 return True
         return False
@@ -121,6 +122,37 @@ def shortest_path(graph, start, end):
     
     return -1
 ```
+
+### 4. Has cycle directed version
+```python
+def has_cycle_directed(graph):
+    visited = set()
+    path = set()
+
+    def dfs(node):
+        if node in path:
+            return True
+        if node in visited:
+            return False
+        visited.add(node)
+        path.add(node)
+
+        for neighbor in graph[node]:
+            if dfs(neighbor):
+                return True
+        
+        path.remove(node)
+        return False
+    
+    for node in graph:
+        if node not in visited:
+            if dfs(node):
+                return True
+    return False
+```
+TODO: Need an example question
+
+
 
 ## Key Techniques
 - Use sets for visited tracking

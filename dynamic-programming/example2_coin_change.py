@@ -26,15 +26,31 @@ class Solution:
         Time Complexity: O(amount * len(coins))
         Space Complexity: O(amount)
         """
-        # dp[i] represents minimum coins needed for amount i
-        dp = [float('inf')] * (amount + 1)
-        dp[0] = 0
+        # dp[i] means the minimum coins needed for amount i
+        # eg., dp[10] means min number of coins needed for amount = 10
         
+        dp = [float('inf') for i in range(amount + 1)]
+
+        dp[0] = 0
         for i in range(1, amount + 1):
             for coin in coins:
-                if coin <= i:
-                    dp[i] = min(dp[i], dp[i - coin] + 1)
-        
+                # dp[i - coin] is defined
+                if i - coin >= 0:
+                    
+                    # [1,2,8,3,7]
+                    # dp[10] = 3 (2,8 and 3,7 and 1,2,7) Why?
+                    
+                    # dp[3] = 2 (1,2 and 3)
+                    # do[2] = 1, dp[1] = 1
+                    # goes back to dp[0] = 0 
+                    # so the equation needs a base, 1
+                    # hence, (dp[i - coin] + 1)
+                    
+
+                    base = 1
+
+                    dp[i] = min((dp[i - coin] +  base), dp[i])
+
         return dp[amount] if dp[amount] != float('inf') else -1
 
 # Test cases

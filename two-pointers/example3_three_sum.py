@@ -60,6 +60,7 @@ class Solution:
         
         return result
 
+
 # Test cases
 def test_three_sum():
     solution = Solution()

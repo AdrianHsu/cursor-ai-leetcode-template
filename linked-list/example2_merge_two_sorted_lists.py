@@ -45,6 +45,7 @@ class Solution:
         tail.next = list1 or list2
         return dummy.next
 
+
 # Helper function to create linked list from list
 def create_linked_list(arr):
     if not arr:

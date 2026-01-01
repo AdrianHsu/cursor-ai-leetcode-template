@@ -13,6 +13,10 @@ Explanation: There are 4 nodes in the graph.
 2nd node (val = 2)'s neighbors are 1st node (val = 1) and 3rd node (val = 3).
 3rd node (val = 3)'s neighbors are 2nd node (val = 2) and 4th node (val = 4).
 4th node (val = 4)'s neighbors are 1st node (val = 1) and 3rd node (val = 3).
+
+ps., I think we only need to return a map which maps each old node to the corresponding new node
+and making sure new node has their children connected correctly. 
+
 """
 
 # Definition for a Node.
@@ -22,30 +26,28 @@ class Node:
         self.neighbors = neighbors if neighbors is not None else []
 
 class Solution:
+
     def cloneGraph(self, node):
-        """
-        BFS approach with hash map
-        Time Complexity: O(V + E)
-        Space Complexity: O(V)
-        """
         if not node:
             return None
-        
+
         from collections import deque
-        clone_map = {}
+
         queue = deque([node])
+        clone_map = {}
         clone_map[node] = Node(node.val)
-        
+
         while queue:
             original = queue.popleft()
             clone = clone_map[original]
-            
+
             for neighbor in original.neighbors:
                 if neighbor not in clone_map:
-                    clone_map[neighbor] = Node(neighbor.val)
+                    new_neighbor = Node(neighbor.val)
                     queue.append(neighbor)
+                    clone_map[neighbor] = new_neighbor
                 clone.neighbors.append(clone_map[neighbor])
-        
+                
         return clone_map[node]
 
 # Helper function to create graph from adjacency list
@@ -62,31 +64,29 @@ def create_graph(adj_list):
     return nodes[0] if nodes else None
 
 # Helper function to convert graph to adjacency list
+# Basically BFS
 def graph_to_adj_list(node):
     if not node:
         return []
-    
     from collections import deque
     visited = set()
     queue = deque([node])
     visited.add(node)
     adj_map = {}
-    
+
     while queue:
         n = queue.popleft()
+        visited.add(n)
         adj_map[n.val] = [neighbor.val for neighbor in n.neighbors]
         
         for neighbor in n.neighbors:
             if neighbor not in visited:
-                visited.add(neighbor)
                 queue.append(neighbor)
-    
-    # Convert to list format
+        
     max_val = max(adj_map.keys())
     result = [[] for _ in range(max_val)]
     for val, neighbors in adj_map.items():
         result[val - 1] = neighbors
-    
     return result
 
 # Test cases

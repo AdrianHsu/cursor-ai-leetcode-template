@@ -47,6 +47,7 @@ class Solution:
         
         return False
 
+
 # Helper function to create linked list with cycle
 def create_linked_list_with_cycle(arr, pos):
     if not arr:

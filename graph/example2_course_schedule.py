@@ -36,17 +36,21 @@ class Solution:
         # Find all courses with no prerequisites
         queue = deque([i for i in range(numCourses) if in_degree[i] == 0])
         completed = 0
+        result = [] # debugging only
         
         while queue:
             course = queue.popleft()
             completed += 1
+            result.append(course) # debugging only
             
             for next_course in graph[course]:
                 in_degree[next_course] -= 1
                 if in_degree[next_course] == 0:
                     queue.append(next_course)
         
+        print(result)
         return completed == numCourses
+
 
 # Test cases
 def test_course_schedule():

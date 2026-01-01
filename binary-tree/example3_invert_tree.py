@@ -31,11 +31,19 @@ class Solution:
         Space Complexity: O(h) where h is height
         """
         if not root:
-            return None
-        
-        # Swap left and right subtrees
-        root.left, root.right = self.invertTree(root.right), self.invertTree(root.left)
-        
+            return
+
+        # This works
+        # root.left, root.right = self.invertTree(root.right), self.invertTree(root.left)
+        # This also works
+        # root.right, root.left = self.invertTree(root.left), self.invertTree(root.right)
+
+
+        # This works
+        tempLeft = root.left
+        root.left = self.invertTree(root.right)
+        root.right = self.invertTree(tempLeft)
+
         return root
 
 # Helper function to create tree from list

@@ -17,27 +17,35 @@ Output: [[1]]
 """
 
 class Solution:
+    def __init__(self):
+        self.results = []
+
+    def backtrack(self, nums, curr):
+        if len(curr) == len(nums):
+
+            print(curr[:])
+            print(curr)
+
+            # this will work
+            self.results.append(curr[:])
+            # this will NOT work. 
+            # TODO: why?
+            # self.results.append(curr)
+
+            return
+
+        for num in nums:
+            if num in curr:
+                continue
+            curr.append(num)
+            self.backtrack(nums, curr)
+            curr.pop()
+        return
+
     def permute(self, nums):
-        """
-        Backtracking approach
-        Time Complexity: O(n! * n)
-        Space Complexity: O(n)
-        """
-        result = []
-        
-        def backtrack(current):
-            if len(current) == len(nums):
-                result.append(current[:])
-                return
-            
-            for num in nums:
-                if num not in current:
-                    current.append(num)
-                    backtrack(current)
-                    current.pop()
-        
-        backtrack([])
-        return result
+        self.results = []
+        self.backtrack(nums, [])
+        return self.results
 
 # Test cases
 def test_permutations():
