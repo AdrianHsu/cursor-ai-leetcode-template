@@ -10,9 +10,25 @@ Example 1:
 Input: nums1 = [4,1,2], nums2 = [1,3,4,2]
 Output: [-1,3,-1]
 Explanation: The next greater element for each value of nums1 is as follows:
-- 4 is underlined in nums2 = [1,3,4,2]. There is no next greater element, so the answer is -1.
-- 1 is underlined in nums2 = [1,3,4,2]. The next greater element is 3.
-- 2 is underlined in nums2 = [1,3,4,2]. There is no next greater element, so the answer is -1.
+- 4 is underlined in nums2 = [1,3,'4',2]. There is no next greater element, so the answer is -1.
+- 1 is underlined in nums2 = ['1',3,4,2]. The next greater element is 3.
+- 2 is underlined in nums2 = [1,3,4,'2']. There is no next greater element, so the answer is -1.
+
+
+Stack:
+i = 0: [1]
+i = 1: [3]
+i = 2: [4]
+i = 3: [4,2]
+next_greater: {1: 3, 3: 4}
+
+---
+Or storing index
+i = 0: [0]
+i = 1: [1]
+i = 2: [2]
+i = 3: [2, 3]
+next_greater: {1: 3, 3: 4}
 
 Example 2:
 Input: nums1 = [2,4], nums2 = [1,2,3,4]
@@ -20,24 +36,41 @@ Output: [3,-1]
 """
 
 class Solution:
-    def nextGreaterElement(self, nums1, nums2):
-        """
-        Monotonic stack approach
-        Time Complexity: O(n + m)
-        Space Complexity: O(n)
-        """
-        stack = []
-        next_greater = {}
+    # Solution 1: store value (cleaner)
+    # def nextGreaterElement(self, nums1, nums2):
+    #     """
+    #     Monotonic stack approach
+    #     Time Complexity: O(n + m)
+    #     Space Complexity: O(n)
+    #     """
+    #     stack = []
+    #     next_greater = {}
         
-        # Build next greater map for nums2
-        for num in nums2:
-            while stack and stack[-1] < num:
-                next_greater[stack.pop()] = num
-            stack.append(num)
+    #     # Build next greater map for nums2
+    #     for num in nums2:
+    #         while stack and stack[-1] < num:
+    #             next_greater[stack.pop()] = num
+    #         stack.append(num)
         
-        # Find next greater for each element in nums1
-        result = [next_greater.get(num, -1) for num in nums1]
-        return result
+    #     # Find next greater for each element in nums1
+    #     result = [next_greater.get(num, -1) for num in nums1]
+    #     return result
+
+    # Solution 2: store index, not value
+    # def nextGreaterElement(self, nums1, nums2):
+    #     stack = []
+    #     next_greater = {}
+
+    #     for i, num in enumerate(nums2):
+    #         while stack and nums2[stack[-1]] < num:
+    #             target_index = stack.pop()
+    #             target_value = nums2[target_index]
+    #             next_greater[target_value] = num
+    #         stack.append(i)
+
+    #     result = [next_greater.get(num, -1) for num in nums1]
+    #     return result
+
 
 # Test cases
 def test_next_greater_element():

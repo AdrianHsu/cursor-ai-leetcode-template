@@ -41,6 +41,8 @@ def is_palindrome(s):
     return s == s[::-1]
 ```
 
+isalnum() meaning is the characters are alphanumeric, meaning alphabet letter (a-z) and numbers (0-9).
+
 ### 4. String Matching
 ```python
 def find_substring(s, pattern):

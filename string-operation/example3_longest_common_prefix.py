@@ -15,24 +15,18 @@ Explanation: There is no common prefix among the input strings.
 """
 
 class Solution:
+    
     def longestCommonPrefix(self, strs):
-        """
-        Time Complexity: O(S) where S is sum of all characters
-        Space Complexity: O(1)
-        """
         if not strs:
             return ""
         
-        # Use first string as reference
         prefix = strs[0]
         
         for s in strs[1:]:
-            # Reduce prefix until it matches current string
             while not s.startswith(prefix):
                 prefix = prefix[:-1]
                 if not prefix:
                     return ""
-        
         return prefix
 
 # Test cases

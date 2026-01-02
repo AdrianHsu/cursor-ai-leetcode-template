@@ -17,6 +17,7 @@ Explanation: There are 4 nodes in the graph.
 ps., I think we only need to return a map which maps each old node to the corresponding new node
 and making sure new node has their children connected correctly. 
 
+and return the new root node, ie., clone_map[root]
 """
 
 # Definition for a Node.

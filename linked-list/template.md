@@ -28,6 +28,7 @@ def two_pointers(head):
         fast = fast.next.next
     return slow
 ```
+Can use it to detect DAG cycles.
 
 ### 3. Reverse Linked List
 ```python
@@ -65,7 +66,7 @@ def merge(l1, l2):
             tail.next = l2
             l2 = l2.next
         tail = tail.next
-    tail.next = l1 or l2
+    tail.next = l1 or l2 # to append the rest basically
     return dummy.next
 ```
 

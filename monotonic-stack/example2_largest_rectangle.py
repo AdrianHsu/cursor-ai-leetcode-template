@@ -9,6 +9,16 @@ Output: 10
 Explanation: The above is a histogram where width of each bar is 1.
 The largest rectangle is shown in the shaded area, which has area = 10 units.
 
+
+Stack:
+
+i = 0: [0]
+i = 1: [1] (pop 0, append 1)
+i = 2: [1,2]
+i = 3: [1,2,3]
+i = 4: [1,4] (pop 3) (pop 2) (append 1)
+i = 5: [1,4,5]
+----------
 Example 2:
 Input: heights = [2,4]
 Output: 4
@@ -23,20 +33,25 @@ class Solution:
         """
         stack = []
         max_area = 0
-        
-        for i, height in enumerate(heights):
-            while stack and heights[stack[-1]] > height:
-                h = heights[stack.pop()]
-                width = i if not stack else i - stack[-1] - 1
-                max_area = max(max_area, h * width)
+
+
+        for i, h in enumerate(heights):
+            while stack and heights[stack[-1]] > h:
+                target_index = stack.pop()
+                target_h = heights[target_index]
+                if stack:
+                    width = i - stack[-1] - 1
+                else:
+                    width = i
+                max_area = max(max_area, width * target_h)
             stack.append(i)
-        
-        # Process remaining bars
+
         while stack:
-            h = heights[stack.pop()]
+            target_index = stack.pop()
+            target_h = heights[target_index]
             width = len(heights) if not stack else len(heights) - stack[-1] - 1
-            max_area = max(max_area, h * width)
-        
+            max_area = max(max_area, width * target_h)
+
         return max_area
 
 # Test cases

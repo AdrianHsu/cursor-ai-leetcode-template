@@ -11,30 +11,43 @@ Explanation: The above elevation map (black section) is represented by array [0,
 Example 2:
 Input: height = [4,2,0,3,2,5]
 Output: 9
+
+i = 0: [0]
+i = 1: [0, 1]
+i = 2: [0, 1, 2]
+i = 3: [0, 3] --> pop 2, pop 1
+i = 4: [0, 3, 4]
+i = 5: [] --> pop 4, pop 3, pop 0
 """
 
 class Solution:
+
     def trap(self, height):
-        """
-        Monotonic stack approach
-        Time Complexity: O(n)
-        Space Complexity: O(n)
-        """
+        # """
+        # Monotonic stack approach
+        # Time Complexity: O(n)
+        # Space Complexity: O(n)
+        # """
         stack = []
         water = 0
-        
-        for i, h in enumerate(height):
-            while stack and height[stack[-1]] < h:
-                bottom = stack.pop()
+
+        for i, right_height in enumerate(height):
+            while stack and height[stack[-1]] < right_height:
+                target_index = stack.pop()
+                target_height = height[target_index]
                 if not stack:
                     break
-                left = stack[-1]
-                width = i - left - 1
-                trapped_height = min(height[left], h) - height[bottom]
+                
+                width = i - stack[-1] - 1
+                # either left or right height (both taller than target_height)
+                left_height = height[stack[-1]]
+                trapped_height = min(left_height, right_height) - target_height
                 water += width * trapped_height
+            
             stack.append(i)
-        
+
         return water
+
 
 # Test cases
 def test_trap():

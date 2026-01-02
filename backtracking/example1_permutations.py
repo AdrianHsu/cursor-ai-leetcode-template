@@ -29,7 +29,6 @@ class Solution:
             # this will work
             self.results.append(curr[:])
             # this will NOT work. 
-            # TODO: why?
             # self.results.append(curr)
 
             return

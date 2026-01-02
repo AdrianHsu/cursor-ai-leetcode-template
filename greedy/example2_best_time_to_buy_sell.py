@@ -17,6 +17,14 @@ Explanation: In this case, no transactions are done and the max profit = 0.
 
 My note:
 even if you see lower min price later in the array, you cannot do anything with a really high price you saw earlier. This is a straightforward greedy question as you only need to traverse one with pointers
+
+The reason we use Greedy instead of a Monotonic Stack here is because of the "Constraint of Time" and the "Goal of the Calculation."
+
+1. The Goal: Global Min vs. Next Smaller Element
+Monotonic Stack is designed to find the "Next Smaller/Greater Element" (a local neighbor). It is useful when a taller bar blocks a shorter bar (like in Histogram).
+
+This Stock Problem asks for the Global Minimum seen so far. You don't care about "who is blocking whom." You only care about: "What is the cheapest I've ever seen this stock before today?"
+A stack is overkill because you don't need to remember the "history" of prices that were higher than your current minimum.
 """
 
 class Solution:

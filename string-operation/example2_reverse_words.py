@@ -30,7 +30,7 @@ class Solution:
         """
         # Split by whitespace and filter out empty strings
         words = s.split()
-        # Reverse and join
+
         return ' '.join(reversed(words))
 
 # Test cases

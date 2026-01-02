@@ -3,7 +3,11 @@
 ## Basic Structure
 ```python
 # Dictionary/Hash Map
+from collections import defaultdict
+
 hash_map = {}
+# or hash_map = defaultdict(list)
+
 hash_map[key] = value
 value = hash_map.get(key, default_value)
 
@@ -64,16 +68,6 @@ def sliding_window(s):
             left += 1
 ```
 
-### 5. Check Duplicates
-```python
-def has_duplicate(arr):
-    seen = set()
-    for item in arr:
-        if item in seen:
-            return True
-        seen.add(item)
-    return False
-```
 
 ## Key Techniques
 - Use defaultdict for cleaner code

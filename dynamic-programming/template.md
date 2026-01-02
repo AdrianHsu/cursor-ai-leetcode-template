@@ -27,6 +27,28 @@ def dp_bottom_up(n):
     return dp[n]
 ```
 
+### 1. Top-Down (Memoization)
+
+Imagine you are solving a large puzzle by breaking it into smaller pieces. Top-Down starts at the **final goal** () and works its way backward to the **base cases**.
+
+* **How it works:** It uses **Recursion**. You ask, "To solve , what do I need?" It tells you, "You need  and ." You keep diving deeper until you hit a value you already know (the base case).
+* **The "Memo" (Memoization):** Without the `memo` dictionary, recursion is extremely slow because it recalculates the same values over and over. Memoization is like keeping a **notebook**. Before calculating anything, the function checks the notebook: "Have I solved this before?" If yes, it returns the answer immediately.
+* **Pros:** Easier to write if you understand the recursive relationship; only calculates subproblems that are actually needed.
+* **Cons:** Can run into "Stack Overflow" errors if the recursion depth is too high.
+
+---
+
+### 2. Bottom-Up (Tabulation)
+
+Instead of starting at the goal, you start at the **very beginning** (the base cases) and build your way up to the final answer.
+
+* **How it works:** It uses **Iteration** (a `for` loop). You fill out a table (usually a List or Array) step-by-step.
+* **The Table (Tabulation):** You start by filling `dp[0]` and `dp[1]`. Then, the loop uses those two values to calculate `dp[2]`. Then it uses `dp[1]` and `dp[2]` to calculate `dp[3]`, and so on.
+* **Pros:** Usually faster than recursion because there is no function call overhead; no risk of stack overflow. It is often easier to optimize for space (e.g., only keeping the last two values instead of a whole array).
+* **Cons:** You must solve all subproblems in order, even if some aren't strictly necessary for the final result.
+
+---
+
 ## Common Patterns
 
 ### 1. Fibonacci

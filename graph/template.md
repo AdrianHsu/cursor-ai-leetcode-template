@@ -35,6 +35,8 @@ def dfs(graph, start, visited=None):
     return result
 ```
 
+ps, `extend()` concats two lists
+
 ### 2. BFS (Breadth-First Search)
 ```python
 from collections import deque
@@ -56,6 +58,7 @@ def bfs(graph, start):
     
     return result
 ```
+BFS is IMPORTANT!
 
 ## Common Algorithms
 
@@ -82,6 +85,9 @@ def has_cycle(graph):
     return False
 ```
 
+This is for Undirected Graph. If it is for directed graph, use two pointers.
+Topological Sort can also detect undirected graph cycles.
+
 ### 2. Topological Sort
 ```python
 def topological_sort(graph):
@@ -103,8 +109,35 @@ def topological_sort(graph):
     
     return result if len(result) == len(graph) else []
 ```
+Note: we don't need visited set for topological sort. because in_degree takes care of that.
 
-### 3. Shortest Path (BFS)
+**Cycle Detection with Topological Sort:**
+
+Topological sort can detect cycles in directed graphs. Here's how:
+
+1. **The Key Insight**: In a valid DAG (Directed Acyclic Graph), we can process all nodes. However, if there's a cycle, nodes within the cycle will never have their in-degree reduced to 0 because they depend on each other in a circular way.
+
+2. **How it works**:
+   - Nodes with in-degree 0 are added to the queue (they have no dependencies)
+   - As we process nodes, we reduce the in-degree of their neighbors
+   - If a cycle exists, some nodes will always have in-degree > 0 (they're waiting for nodes in the cycle)
+   - The algorithm will finish with `result` containing fewer nodes than the total graph size
+
+3. **The Detection**:
+   - `len(result) == len(graph)`: All nodes processed → **No cycle** → Valid topological order
+   - `len(result) < len(graph)`: Some nodes unprocessed → **Cycle exists** → Returns empty list `[]`
+
+**Example with cycle:**
+```
+Graph: {0: [1], 1: [2], 2: [1]}  # 1 → 2 → 1 forms a cycle
+- Node 0 has in-degree 0, gets processed
+- Node 1 has in-degree 1 (from 2), never reaches 0
+- Node 2 has in-degree 1 (from 1), never reaches 0
+- Result: [0] (only 1 node, but graph has 3 nodes)
+- Returns: [] (indicating cycle)
+```
+
+### 3. Shortest Path (basically use BFS)
 ```python
 def shortest_path(graph, start, end):
     queue = deque([(start, 0)])
@@ -150,7 +183,6 @@ def has_cycle_directed(graph):
                 return True
     return False
 ```
-TODO: Need an example question
 
 
 

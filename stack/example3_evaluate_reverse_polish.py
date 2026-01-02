@@ -52,7 +52,6 @@ class Solution:
                 stack.append(int(token))
         
         return stack[0]
-
 # Test cases
 def test_eval_rpn():
     solution = Solution()

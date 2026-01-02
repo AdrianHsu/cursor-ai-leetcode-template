@@ -1,6 +1,9 @@
 # Greedy Template
 
 ## Basic Strategy
+To apply greedy, basically first "sort" the input, then check one-by-one see which one is valid.
+eg., merge_interval, best_time_to_buy_sell.
+
 ```python
 def greedy_solution(problem):
     # Sort or prioritize
@@ -33,25 +36,7 @@ def activity_selection(activities):
     return result
 ```
 
-### 2. Fractional Knapsack
-```python
-def fractional_knapsack(items, capacity):
-    # Sort by value/weight ratio
-    items.sort(key=lambda x: x[0]/x[1], reverse=True)
-    
-    total_value = 0
-    for value, weight in items:
-        if capacity >= weight:
-            total_value += value
-            capacity -= weight
-        else:
-            total_value += value * (capacity / weight)
-            break
-    
-    return total_value
-```
-
-### 3. Minimum Coins
+### 2. Minimum Coins
 ```python
 def min_coins(coins, amount):
     coins.sort(reverse=True)
@@ -65,7 +50,7 @@ def min_coins(coins, amount):
     return count if amount == 0 else -1
 ```
 
-### 4. Jump Game
+### 3. Jump Game
 ```python
 def can_jump(nums):
     max_reach = 0

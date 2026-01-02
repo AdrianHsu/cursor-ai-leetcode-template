@@ -26,6 +26,8 @@ Output: 3
 from collections import deque
 
 class Solution:
+
+    # BFS solution
     def numIslands(self, grid):
         """
         BFS approach using queue
@@ -50,7 +52,7 @@ class Solution:
                     new_row, new_col = row + dr, col + dc
                     if (0 <= new_row < rows and 0 <= new_col < cols and 
                         grid[new_row][new_col] == '1'):
-                        grid[new_row][new_col] = '0'
+                        grid[new_row][new_col] = '0'  # Mark as visited
                         queue.append((new_row, new_col))
         
         for i in range(rows):
@@ -60,6 +62,41 @@ class Solution:
                     bfs(i, j)
         
         return islands
+
+
+    # I wrote a DFS solution
+    # def numIslands(self, grid):
+
+    #     islands = 0
+    #     if len(grid) == 0 or len(grid[0]) == 0:
+    #         return 0
+    #     m = len(grid)
+    #     n = len(grid[0])
+
+    #     directions = [[0, 1], [0, -1], [-1, 0], [1, 0]]
+
+    #     def dfs(i, j):
+
+    #         if grid[i][j] == "1":
+    #             grid[i][j] = "0"
+            
+    #         for direction in directions:
+    #             di = i + direction[0]
+    #             dj = j + direction[1]
+
+    #             if di >= 0 and di < m and dj >= 0 and dj < n:
+    #                 if grid[di][dj] == "1":
+    #                     dfs(di, dj)
+
+    #         return 
+
+    #     for i in range(m):
+    #         for j in range(n):
+    #             if grid[i][j] == "1":
+    #                 islands += 1
+    #                 dfs(i, j)
+
+    #     return islands
 
 # Test cases
 def test_num_islands():
