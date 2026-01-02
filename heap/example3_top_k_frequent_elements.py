@@ -22,7 +22,7 @@ class Solution:
         Time Complexity: O(n log k)
         Space Complexity: O(n)
         """
-        count = Counter(nums)
+        count = Counter(nums) # use counter to get freq per number. useful
         heap = []
         
         for num, freq in count.items():

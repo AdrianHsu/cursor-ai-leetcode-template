@@ -25,13 +25,15 @@ class Solution:
         Time Complexity: O(n log k)
         Space Complexity: O(k)
         """
+        # it is a min heap
         heap = []
         
         for num in nums:
             heapq.heappush(heap, num)
-            if len(heap) > k:
+            if len(heap) > k: # pop the minimal one
                 heapq.heappop(heap)
         
+        # return the tail, ie., the largest 
         return heap[0]
 
 
