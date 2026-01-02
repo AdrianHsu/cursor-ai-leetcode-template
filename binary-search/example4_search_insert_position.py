@@ -25,18 +25,21 @@ class Solution:
         Time Complexity: O(log n)
         Space Complexity: O(1)
         """
-        left = 0
-        right = len(nums)
+        l = 0 
+        r= len(nums) - 1
         
-        while left < right:
-            mid = left + (right - left) // 2
-            if nums[mid] < target:
-                left = mid + 1
+        while l <= r:
+            m = (l + r) // 2
+            
+            if nums[m] == target:
+                return m
+            elif nums[m] < target:
+                l = m + 1
             else:
-                right = mid
+                r = m - 1
         
-        return left
-
+        # When the loop breaks, l is the insertion point
+        return l
 
 # Test cases
 def test_search_insert():

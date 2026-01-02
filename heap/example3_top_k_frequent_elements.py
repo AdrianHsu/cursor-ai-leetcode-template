@@ -30,8 +30,7 @@ class Solution:
             if len(heap) > k:
                 heapq.heappop(heap)
         
-        return [num for freq, num in heap]
-
+        return [num for (_, num) in heap]
 
 # Test cases
 def test_top_k_frequent():

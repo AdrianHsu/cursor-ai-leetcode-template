@@ -17,6 +17,13 @@ heap[0]                          # Peek smallest (without popping)
 heap = []
 heapq.heappush(heap, -item)     # Push negated value
 -heapq.heappop(heap)             # Pop and negate back
+
+# heap often pair with Counter() 
+from collections import Counter
+count = Counter(nums)
+for num, freq in count.items():
+
+# 
 ```
 
 ### Custom Comparator
@@ -44,24 +51,44 @@ def find_kth_largest(nums, k):
     return heap[0]
 ```
 
-### 2. Merge K Sorted Lists
+Note, heapq is "Heap Queue"
+So heappop() will pop the [0] (head), which is the smallest one
+
+### 2. Merge K Sorted Lists (IMPORTANT)
 ```python
 import heapq
+def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+        heap = []
+        for i, node in enumerate(lists):
+            if node:
+                heapq.heappush(heap, (node.val, i, node))
+        
+        dummy = ListNode(0)
+        curr = dummy
 
-def merge_k_lists(lists):
-    heap = []
-    for i, lst in enumerate(lists):
-        if lst:
-            heapq.heappush(heap, (lst[0], i, 0))
-    
-    result = []
-    while heap:
-        val, list_idx, elem_idx = heapq.heappop(heap)
-        result.append(val)
-        if elem_idx + 1 < len(lists[list_idx]):
-            heapq.heappush(heap, (lists[list_idx][elem_idx + 1], list_idx, elem_idx + 1))
-    return result
+        while heap:
+            node_val, list_idx, node = heapq.heappop(heap)
+            if node.next:
+                heapq.heappush(heap, (node.next.val, list_idx, node.next))
+            curr.next = node
+            curr = curr.next
+        
+        return dummy.next
 ```
+How do you know what to store in heapq?
+1. it must need `node.val` to be the key, as it is a min-heap sorted by val
+2. it must need `node` itself to build the new linked list
+3. how about `idx`?
+
+If we do `heapq.heappush(heap, (node.val, node))` it will face errors
+```
+TypeError: '<' not supported between instances of 'ListNode' and 'ListNode'
+    heapq.heappush(heap, (node.val, node))
+```
+so we need to include `idx` so that "if val is the same, we compare idx during sorting for these nodes" .
+
+Hence, we need `node.val`, `idx`, and `node`.
+
 
 ### 3. Top K Frequent Elements
 ```python
@@ -75,8 +102,9 @@ def top_k_frequent(nums, k):
         heapq.heappush(heap, (freq, num))
         if len(heap) > k:
             heapq.heappop(heap)
-    return [num for freq, num in heap]
+    return [num for (_, num) in heap]
 ```
+basically integrate with Counter.
 
 ### 4. Find Median from Data Stream
 ```python

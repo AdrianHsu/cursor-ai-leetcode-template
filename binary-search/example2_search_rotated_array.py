@@ -19,6 +19,8 @@ Output: -1
 Example 3:
 Input: nums = [1], target = 0
 Output: -1
+
+Need more practice. ugly question.
 """
 
 class Solution:
@@ -28,29 +30,29 @@ class Solution:
         Time Complexity: O(log n)
         Space Complexity: O(1)
         """
-        left = 0
-        right = len(nums) - 1
+        l = 0
+        r = len(nums) - 1
         
-        while left <= right:
-            mid = left + (right - left) // 2
-            
-            if nums[mid] == target:
-                return mid
-            
-            # Check which half is sorted
-            if nums[left] <= nums[mid]:  # Left half is sorted
-                if nums[left] <= target < nums[mid]:
-                    right = mid - 1
-                else:
-                    left = mid + 1
-            else:  # Right half is sorted
-                if nums[mid] < target <= nums[right]:
-                    left = mid + 1
-                else:
-                    right = mid - 1
-        
-        return -1
+        while l <= r:
+            m = (l + r) // 2
 
+            # Check if nums[m] is target
+            if nums[m] == target:
+                return m
+
+            # when nums[m] is not target
+            # Check which side is sorted.
+            if nums[l] <= nums[m]: # Left is sorted, Right is not
+                if nums[l] <= target < nums[m]: # healthy side. check it is in-bound
+                    r = m - 1
+                else: # messy side: it can be because target >= nums[m]  OR target (0) < nums[l] (4)
+                    l = m + 1
+            else: # nums[l] > nums[m]. Right is sorted, Left is not
+                if nums[m] < target <= nums[r]: # healthy side. check it is in-bound
+                    l = m + 1
+                else: 
+                    r = m - 1
+        return -1
 
 # Test cases
 def test_search_rotated():

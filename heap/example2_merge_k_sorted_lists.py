@@ -44,23 +44,22 @@ class Solution:
         heap = []
         
         # Push first node of each list into heap
-        for i, head in enumerate(lists):
-            if head:
-                heapq.heappush(heap, (head.val, i, head))
+        for i, node in enumerate(lists):
+            if node:
+                heapq.heappush(heap, (node.val, i, node))
         
         dummy = ListNode(0)
-        current = dummy
-        
+        curr = dummy
+
         while heap:
-            val, list_idx, node = heapq.heappop(heap)
-            current.next = node
-            current = current.next
-            
-            # Push next node from the same list
+            node_val, list_idx, node = heapq.heappop(heap)
             if node.next:
                 heapq.heappush(heap, (node.next.val, list_idx, node.next))
+            curr.next = node
+            curr = curr.next
         
         return dummy.next
+
 
 
 # Helper function to create linked list from list

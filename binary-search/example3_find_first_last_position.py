@@ -27,35 +27,28 @@ class Solution:
         Time Complexity: O(log n)
         Space Complexity: O(1)
         """
-        def find_leftmost(nums, target):
-            left = 0
-            right = len(nums)
-            while left < right:
-                mid = left + (right - left) // 2
-                if nums[mid] < target:
-                    left = mid + 1
+        def find_bound(is_left):
+            l, r = 0, len(nums) - 1
+            bound = -1
+            
+            while l <= r:
+                m = (l + r) // 2
+                if nums[m] < target:
+                    l = m + 1
+                elif nums[m] > target:
+                    r = m - 1
                 else:
-                    right = mid
-            return left
-        
-        def find_rightmost(nums, target):
-            left = 0
-            right = len(nums)
-            while left < right:
-                mid = left + (right - left) // 2
-                if nums[mid] <= target:
-                    left = mid + 1
-                else:
-                    right = mid
-            return left - 1
-        
-        left_pos = find_leftmost(nums, target)
-        
-        if left_pos == len(nums) or nums[left_pos] != target:
-            return [-1, -1]
-        
-        right_pos = find_rightmost(nums, target)
-        return [left_pos, right_pos]
+                    # We found the target!
+                    bound = m
+                    if is_left:
+                        # Keep looking left to find the very first one
+                        r = m - 1
+                    else:
+                        # Keep looking right to find the very last one
+                        l = m + 1
+            return bound
+
+        return [find_bound(True), find_bound(False)]
 
 
 # Test cases

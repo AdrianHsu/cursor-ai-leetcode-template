@@ -16,7 +16,7 @@ Input: nums = [3,2,3,1,2,4,5,5,6], k = 4
 Output: 4
 """
 
-import heapq
+import heapq # heapq means heap queue
 
 class Solution:
     def findKthLargest(self, nums, k):
@@ -30,11 +30,29 @@ class Solution:
         
         for num in nums:
             heapq.heappush(heap, num)
-            if len(heap) > k: # pop the minimal one
-                heapq.heappop(heap)
+            # since heapq is a queue, so when pop() it pops the popleft() ie., the head
+            # pop the minimal one, the head, ie., heap[0]
+            if len(heap) > k:
+                v = heapq.heappop(heap)
+                print(v)
         
-        # return the tail, ie., the largest 
+        # Since it is min-heap, so 
+        # heap[0] is the head. ie., the smallest amongst these K items
+        # heap[-1] is the tail, ie., the biggest amongst these K items
+        # return the smallest one
+        print("heap[-1]", heap[-1])
+        print("heap[0]", heap[0])
         return heap[0]
+
+    # def findKthLargest(self, nums, k):
+    #     heap = []
+
+    #     for num in nums:
+    #         heapq.heappush(heap, num)
+    #         if len(heap) > k:
+    #             heapq.heappop(heap)
+    #     return heap[0]
+
 
 
 # Test cases
