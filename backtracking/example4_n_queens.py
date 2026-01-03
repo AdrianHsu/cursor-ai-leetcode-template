@@ -25,29 +25,36 @@ class Solution:
         self.results = []
         board = [['.' for _ in range(n)] for _ in range(n)]
         
-        def is_safe(row, col):
-            # Check column above
+        def isSafe(row, col):
+
+            # Case 1: same column does not have a queen
             for i in range(row):
                 if board[i][col] == 'Q':
                     return False
-            
-            # Check upper-left diagonal
-            i, j = row - 1, col - 1
-            while i >= 0 and j >= 0:
-                if board[i][j] == 'Q':
+
+            # Case 2: same row does not have a queen
+            # Always True because we choose where to put Q on a row
+
+            # Case 3: diagonal `\`
+            di = row - 1
+            dj = col - 1
+            while di >= 0 and dj >= 0:
+                if board[di][dj] == 'Q':
                     return False
-                i -= 1
-                j -= 1
-            
-            # Check upper-right diagonal
-            i, j = row - 1, col + 1
-            while i >= 0 and j < n:
-                if board[i][j] == 'Q':
+                di -= 1
+                dj -= 1
+ 
+            # Case 4: diagonal `/`
+            di = row - 1
+            dj = col + 1
+            while di >= 0 and dj < n:
+                if board[di][dj] == 'Q':
                     return False
-                i -= 1
-                j += 1
-            
+                di -= 1
+                dj += 1                       
+
             return True
+
         
         def backtrack(row):
             if row == n:
@@ -57,7 +64,7 @@ class Solution:
                 return
             
             for col in range(n):
-                if is_safe(row, col):
+                if isSafe(row, col):
                     board[row][col] = 'Q'  # Make choice
                     backtrack(row + 1)      # Recurse
                     board[row][col] = '.'   # Undo choice
