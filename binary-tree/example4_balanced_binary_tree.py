@@ -16,6 +16,8 @@ Output: false
 Example 3:
 Input: root = []
 Output: true
+
+Crucially, if at any point we discover a subtree is not balanced, we stop calculating height and return a specific "error code" (typically -1) to signal failure immediately.
 """
 
 # Definition for a binary tree node.

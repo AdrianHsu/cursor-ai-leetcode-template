@@ -18,6 +18,8 @@ Explanation: There is no root-to-leaf path with sum = 5.
 Example 3:
 Input: root = [], targetSum = 0
 Output: false
+
+Note: there is also Path Sum II, Path Sum III
 """
 
 # Definition for a binary tree node.

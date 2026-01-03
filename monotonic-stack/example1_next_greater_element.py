@@ -37,24 +37,24 @@ Output: [3,-1]
 
 class Solution:
     # Solution 1: store value (cleaner)
-    # def nextGreaterElement(self, nums1, nums2):
-    #     """
-    #     Monotonic stack approach
-    #     Time Complexity: O(n + m)
-    #     Space Complexity: O(n)
-    #     """
-    #     stack = []
-    #     next_greater = {}
+    def nextGreaterElement(self, nums1, nums2):
+        """
+        Monotonic stack approach
+        Time Complexity: O(n + m)
+        Space Complexity: O(n)
+        """
+        stack = []
+        next_greater = {}
         
-    #     # Build next greater map for nums2
-    #     for num in nums2:
-    #         while stack and stack[-1] < num:
-    #             next_greater[stack.pop()] = num
-    #         stack.append(num)
+        # Build next greater map for nums2
+        for num in nums2:
+            while stack and stack[-1] < num:
+                next_greater[stack.pop()] = num
+            stack.append(num)
         
-    #     # Find next greater for each element in nums1
-    #     result = [next_greater.get(num, -1) for num in nums1]
-    #     return result
+        # Find next greater for each element in nums1
+        result = [next_greater.get(num, -1) for num in nums1]
+        return result
 
     # Solution 2: store index, not value
     # def nextGreaterElement(self, nums1, nums2):

@@ -16,6 +16,12 @@ Example 2:
 Input: root = [5,1,4,null,null,3,6]
 Output: false
 Explanation: The root node's value is 5 but its right child's value is 4.
+
+The Trap! Consider a tree where the root is 5 and its right child is 8. This is valid. 
+But if 8 has a left child 3, that 3 is less than 8 (locally correct), but it is also less than 5. 
+Since it's in the right subtree of 5, it must be greater than 5.
+
+Hence, we have to pass down (min, max) as a backtracking param
 """
 
 # Definition for a binary tree node.

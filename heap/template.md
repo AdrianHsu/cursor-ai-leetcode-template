@@ -141,3 +141,5 @@ class MedianFinder:
 - Use tuples for custom sorting: (priority, item)
 - Two heaps for median finding (small max heap + large min heap)
 
+## References
+- https://www.1point3acres.com/bbs/thread-1159711-1-1.html

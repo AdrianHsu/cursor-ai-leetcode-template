@@ -91,6 +91,45 @@ def invert_tree(root):
     return root
 ```
 
+## LCA
+
+The function definition is technically: 
+`"Return the LCA if it exists in this subtree; 
+otherwise, return the node (p or q) if it exists in this subtree."`
+
+It is not only `"Return the LCA if it exists in this subtree"` --> It has double meaning.
+
+When the code hits if root == p or root == q: return root, it stops searching that branch. 
+You might worry: "Wait, if I stop at p, how do I know if q is inside p's subtree?"
+
+The answer: there are two scenarios here, and the logic handles both perfectly already.
+
+* Scenario A: q is inside p's subtree
+
+If root is p, and q is somewhere below p:
+
+We return p immediately. We don't visit the children of p. We effectively "ignore" finding q. This is correct **because hypothetically if q is a descendant of p, then p IS the LCA --> Done**. We return p up the stack. The top-level caller receives p, which is the correct LCA.
+
+* Scenario B: q is in a completely different branch. 
+
+If root is p, and q is in the neighbor's right subtree: 
+
+We return p immediately. The recursion unwinds to a common ancestor. Parent receives p from its left child. Parent searches its right child and eventually finds q (returning q up). Parent sees that it received a Left result (p) and a Right result (q).
+
+Crucial Step: Because both sides returned something, Parent knows "I am the split point". Parent returns itself.
+Hence, even if we don't look at nodes below `p`, as the parent will find q (under such case) so returning `p` is effectively the same result.
+
+However, the reason why it worked is because of 1 constraint: "All Node.val are unique... p and q will exist in the tree."
+
+If q = 9 (and 9 is not in the tree), the standard algorithm would indeed return 5, not None.
+
+And technically, that would be wrong if we require both nodes to exist to have an LCA.
+
+Because the problem guarantees q exists, the algorithm is allowed to be "lazy."
+
+
+--
+
 ## Key Techniques
 - Recursion for tree problems
 - Base case: check if root is None
