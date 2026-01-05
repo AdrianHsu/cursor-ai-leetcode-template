@@ -24,40 +24,14 @@ Example Usage:
 
 
 class ResumableListIterator:
-    """
-    A resumable iterator for linear data structures like lists or arrays.
-    Tracks the current index to manage iteration state.
-    
-    Time Complexity:
-        - next(): O(1)
-        - has_next(): O(1)
-        - get_state(): O(1)
-        - set_state(): O(1)
-    
-    Space Complexity: O(1) for state management
-    """
-    
     def __init__(self, data):
-        """
-        Initialize the iterator with data.
-        
-        Args:
-            data: List or array-like structure to iterate over
-        """
         self.data = data
         self.index = 0
     
     def next(self):
-        """
-        Return the next element and advance the iterator.
-        
-        Returns:
-            The next element in the iteration
-            
-        Raises:
-            StopIteration: If there are no more elements
-        """
         if not self.has_next():
+            # Note: we have to implement exception handling `StopIteration` anyway
+            # for two cases: calling next directly, or when using __next__ underneath (eg., for loop)
             raise StopIteration("No more elements in iterator")
         
         value = self.data[self.index]
@@ -65,22 +39,10 @@ class ResumableListIterator:
         return value
     
     def has_next(self):
-        """
-        Check if there are more elements to iterate over.
-        
-        Returns:
-            True if there are more elements, False otherwise
-        """
         return self.index < len(self.data)
     
     def get_state(self):
-        """
-        Get the current state of the iterator.
-        The state is serializable (just an integer index).
-        
-        Returns:
-            int: The current index position
-        """
+        # pretty simple: check index value
         return self.index
     
     def set_state(self, state):
