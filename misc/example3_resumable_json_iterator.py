@@ -141,6 +141,8 @@ class MultipleJsonFileIterator(IteratorInterface):
         # Restore the position within that file
         self.inner.set_state(inner_state)
 
+
+######### tests ########
 def create_temp_json(data):
     """
     Helper to create a temp file with JSON data.

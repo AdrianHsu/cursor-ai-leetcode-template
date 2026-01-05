@@ -12,9 +12,9 @@ import tempfile
 
 # Import the base iterator from File 1
 try:
-    from example5_async_iterator import AsyncFileIterator
+    from example4_async_iterator import AsyncFileIterator
 except ImportError:
-    raise ImportError("Please ensure 'example5_async_iterator.py' is in the same directory.")
+    raise ImportError("Please ensure 'example4_async_iterator.py' is in the same directory.")
 
 
 class CompositeAsyncIterator:
