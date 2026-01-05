@@ -25,6 +25,19 @@ Every resumable iterator should implement:
    - `__iter__()`: Make it iterable
    - `__next__()`: Support `for` loops
 
+
+In Python, there is a distinction between an Iterable and an Iterator.
+
+1. The Relationship
+* Iterable: An object that can return an iterator (e.g., a `List, Dict, or String`). It implements `__iter__`.
+* Iterator: The actual "pointer" object that moves across the data. It implements both `__iter__` and `__next__` . 
+* By convention, all Iterators must also be Iterables. This is why we add `return self` in `__iter__` even though we are implementing a Iterator, not a Iterable.
+
+Example
+
+when you write `for x in iterator9`:, Python first calls `iter(iterator9)`. If your class doesn't have `__iter__`, Python says: "I don't know how to start a loop with this object," even though you have a `__next__` method ready to go. By adding `__iter__` that returns self, you are saying: "I am an iterator, and if you want to loop over me, just use me as I am."
+
+
 ## Basic Structure
 
 ```python

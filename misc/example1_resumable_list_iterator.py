@@ -101,6 +101,25 @@ class ResumableListIterator:
         
         self.index = state
     
+    """
+    In python, these double-underscore methods are called Magic Methods
+    or Dunder Methods (double underscore)
+    They are not meant to be called directly by a programmer 
+    but are invoked automatically by Python in response to specific 
+    operations or built-in functions. 
+
+    __iter__ and __next__ (The Iterator Protocol)
+    If you add these, your object becomes an Iterable. This allows your object to be used in for loops, list() conversions, or zip().
+
+    __iter__: This is called once when the loop starts. It must return the iterator object itself.
+    __next__: This is called on every single "lap" of the loop. When there is no more data, it must raise a StopIteration exception.
+
+    When you write for x in my_obj:, Python internally does this:
+
+    It calls it = iter(my_obj), which triggers your __iter__ method.
+    It repeatedly calls next(it), which triggers your __next__ method.
+    It catches the StopIteration exception to know when to stop gracefully.
+    """
     def __iter__(self):
         """Make the iterator compatible with Python's iteration protocol."""
         return self
@@ -166,11 +185,17 @@ def test_resumable_list_iterator():
     except ValueError:
         pass  # Expected
     
-    # Test case 6: Python iteration protocol
+    # Test case 6: Python iteration protocol --> Needs __iter__ and __next__
     iterator9 = ResumableListIterator([1, 2, 3])
     result = list(iterator9)
     assert result == [1, 2, 3], "Test case 6 failed"
-    
+
+    # Test case 7: Python iteration protocol --> Needs __iter__ and __next__
+    iterator10 = ResumableListIterator([1, 2, 3, 4])
+    result = []
+    for i in iterator10:
+        result.append(i)
+    assert result == [1, 2, 3, 4], "Test case 7 failed"   
     print("All test cases passed!")
 
 
