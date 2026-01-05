@@ -1,6 +1,6 @@
 MISC
 
-* Resumable iterator (done, see `python-syntactic-sugar/`)
+* Resumable iterator (done, see example1)
 * Excel Spreadsheet with dependencies
 * Hit counter (https://leetcode.com/problems/design-hit-counter/description/)
 * Text justification (https://leetcode.com/problems/text-justification)
