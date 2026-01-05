@@ -39,8 +39,22 @@ class TestDatabaseConnection(unittest.TestCase):
     def test_successful_connection(self):
         print("\n--- Running Success Test ---")
         db_instance = DatabaseConnection("Production_DB")
+        """
+        In simple terms `with` is used in Context Manager, to support Resource Management.
+        It is a shortcut that ensures that no matter what happens (even if the code crashes), 
+        your resources—like files, database connections, or network sockets—are closed or released properly.
+
+        1. The "Problem" without with
+        If you don't use with, you have to be very careful. 
+        If an error happens between opening and closing a file, the file stays open in memory, which can lead to "Memory Leaks" or "File Lock" errors.
+        
+        eg., 
+        # The "Safe" (Pythonic) way
+        with open("data.txt", "w") as f:
+            f.write("Hello")
+        """
         with db_instance as db:
-            db.execute_query("SELECT * FROM users")
+            print(db.execute_query("SELECT * FROM users"))
             
     def test_connection_closes_on_error(self):
         print("\n--- Running Error Test ---")
