@@ -1,6 +1,7 @@
 import unittest
 
 """
+Dunder example (Double Underscore function)
 By implementing __enter__ and __exit__
 Now it supports `with` statement
 """
