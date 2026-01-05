@@ -1,0 +1,15 @@
+MISC
+
+* Resumable iterator (done, see `python-syntactic-sugar/`)
+* Excel Spreadsheet with dependencies
+* Hit counter (https://leetcode.com/problems/design-hit-counter/description/)
+* Text justification (https://leetcode.com/problems/text-justification)
+* Webhook system design
+* Debugging concurrency bug
+* high throughput web crawler design
+* Rate limited (sliding window, fixed window, token bucket, leaky bucket)
+* CD directory
+* In memory Database (done, see `python-syntactic-sugar/`)
+* Node counting
+* type transformation
+* kv store
