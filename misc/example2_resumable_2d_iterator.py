@@ -25,26 +25,7 @@ Example Usage:
 
 
 class Resumable2DIterator:
-    """
-    A resumable iterator for two-dimensional data structures.
-    Traverses elements row by row, tracking both row and column indices.
-    
-    Time Complexity:
-        - next(): O(1) amortized
-        - has_next(): O(1) amortized (may skip empty rows)
-        - get_state(): O(1)
-        - set_state(): O(1)
-    
-    Space Complexity: O(1) for state management
-    """
-    
     def __init__(self, matrix):
-        """
-        Initialize the iterator with a 2D structure.
-        
-        Args:
-            matrix: List of lists or 2D array-like structure
-        """
         self.matrix = matrix
         self.row = 0
         self.col = 0
@@ -63,43 +44,19 @@ class Resumable2DIterator:
             self.col = 0
     
     def next(self):
-        """
-        Return the next element and advance the iterator.
-        
-        Returns:
-            The next element in the 2D structure
-            
-        Raises:
-            StopIteration: If there are no more elements
-        """
         if not self.has_next():
             raise StopIteration("No more elements in iterator")
         
         value = self.matrix[self.row][self.col]
         self.col += 1
         
-        # Move to next valid position
-        self._move_to_valid_position()
-        
+        self._move_to_valid_position()        
         return value
     
     def has_next(self):
-        """
-        Check if there are more elements to iterate over.
-        
-        Returns:
-            True if there are more elements, False otherwise
-        """
         return self.row < len(self.matrix)
     
     def get_state(self):
-        """
-        Get the current state of the iterator.
-        The state is a tuple (row, col) which is serializable.
-        
-        Returns:
-            tuple: (row, col) - The current position indices
-        """
         return (self.row, self.col)
     
     def set_state(self, state):
@@ -135,11 +92,9 @@ class Resumable2DIterator:
         self._move_to_valid_position()
     
     def __iter__(self):
-        """Make the iterator compatible with Python's iteration protocol."""
         return self
     
     def __next__(self):
-        """Support Python's iteration protocol (for 'for' loops)."""
         return self.next()
 
 
