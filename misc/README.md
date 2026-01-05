@@ -7,7 +7,7 @@ MISC
 * Webhook system design
 * Debugging concurrency bug
 * high throughput web crawler design
-* Rate limited (sliding window, fixed window, token bucket, leaky bucket)
+* IMPORTANT: Rate limiter (sliding window, fixed window, token bucket, leaky bucket)
 * CD directory
 * In memory Database (done, see `python-syntactic-sugar/`)
 * Node counting
