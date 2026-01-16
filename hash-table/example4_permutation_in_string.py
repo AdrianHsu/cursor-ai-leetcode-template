@@ -32,32 +32,26 @@ class Solution:
         if len(s1) > len(s2):
             return False
         
-        # Count frequency of characters in s1
-        s1_count = {}
+        s1_cnt = defaultdict(int)
         for char in s1:
-            s1_count[char] = s1_count.get(char, 0) + 1
-        
-        # Sliding window in s2
-        window_count = {}
-        left = 0
-        
-        for right in range(len(s2)):
-            # Expand window: add character at right
-            char_right = s2[right]
-            window_count[char_right] = window_count.get(char_right, 0) + 1
-            
-            # Shrink window if it's larger than s1's length
-            while right - left + 1 > len(s1):
-                char_left = s2[left]
-                window_count[char_left] -= 1
-                if window_count[char_left] == 0:
-                    del window_count[char_left]
-                left += 1
-            
-            # Check if current window is a permutation of s1
-            if window_count == s1_count:
+            s1_cnt[char] += 1
+
+        window_cnt = defaultdict(int)
+        l = 0
+        for r in range(len(s2)):
+            char_r = s2[r]
+            window_cnt[char_r] += 1
+
+            while r - l + 1 > len(s1):
+                char_l = s2[l]
+                window_cnt[char_l] -= 1
+                if window_cnt[char_l] == 0:
+                    del window_cnt[char_l]
+                l += 1
+
+            # compare two maps directly, which is why we needed `del` those earlier
+            if window_cnt == s1_cnt:
                 return True
-        
         return False
 
 # Test cases
