@@ -2,7 +2,7 @@
 
 ## Basic Structure
 
-### Standard Binary Search
+### Standard Binary Search for "Find Target"
 ```python
 def binary_search(arr, target):
     left = 0
@@ -18,6 +18,20 @@ def binary_search(arr, target):
             right = mid - 1
     
     return -1
+```
+
+
+### Standard Binary Search for "Range Convergence"
+```python
+def findBoundary(nums):
+    l, r = 0, len(nums) - 1
+    while l < r:
+        m = l + (r - l) // 2
+        if nums[m] <nums[m + 1]:
+            l = m + 1
+        else:
+            r = m
+    return l
 ```
 
 ### Find first and last position
