@@ -27,7 +27,7 @@ def findBoundary(nums):
     l, r = 0, len(nums) - 1
     while l < r:
         m = l + (r - l) // 2
-        if nums[m] <nums[m + 1]:
+        if nums[m] < nums[m + 1]: # this can be any condition eg, compared with nums[r], isBadVersion(m), etc.
             l = m + 1
         else:
             r = m

@@ -27,28 +27,36 @@ class Solution:
         Time Complexity: O(log n)
         Space Complexity: O(1)
         """
-        def find_bound(is_left):
-            l, r = 0, len(nums) - 1
-            bound = -1
-            
-            while l <= r:
-                m = (l + r) // 2
-                if nums[m] < target:
-                    l = m + 1
-                elif nums[m] > target:
-                    r = m - 1
-                else:
-                    # We found the target!
-                    bound = m
-                    if is_left:
-                        # Keep looking left to find the very first one
-                        r = m - 1
-                    else:
-                        # Keep looking right to find the very last one
-                        l = m + 1
-            return bound
+        if not nums:
+            return [-1, -1]
+        
+        l = 0
+        r = len(nums) - 1
+        while l < r:
+            m = (l + r) // 2
+            if nums[m] == target:
+                r = m
+            elif nums[m] < target:
+                l = m + 1
+            elif nums[m] > target:
+                r = m
+                
+        if nums[l] != target: return [-1, -1]
+        ans1 = l
 
-        return [find_bound(True), find_bound(False)]
+        l = 0
+        r = len(nums) - 1
+        while l < r:
+            m = (l + r + 1) // 2
+            if nums[m] == target:
+                l = m
+            elif nums[m] < target:
+                l = m
+            elif nums[m] > target:
+                r = m - 1
+        ans2 = l
+
+        return [ans1, ans2]
 
 
 # Test cases

@@ -26,19 +26,16 @@ class Solution:
         Space Complexity: O(1)
         """
         l = 0 
-        r= len(nums) - 1
+        r= len(nums) 
         
-        while l <= r:
+        while l < r:
             m = (l + r) // 2
             
-            if nums[m] == target:
-                return m
-            elif nums[m] < target:
+            if nums[m] < target:
                 l = m + 1
             else:
-                r = m - 1
+                r = m 
         
-        # When the loop breaks, l is the insertion point
         return l
 
 # Test cases

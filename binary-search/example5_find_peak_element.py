@@ -27,23 +27,17 @@ class Solution:
         Time Complexity: O(log n)
         Space Complexity: O(1)
         """
-        n = len(nums)
-        l, r = 0, n - 1
-        ans = 0 
-        
-        while l <= r:
+        l = 0
+        r = len(nums) - 1
+
+        # [1,2,3,4,5,2,3]
+        while l < r:
             m = (l + r) // 2
-            
-            # Check if m is on a downward slope. ie., there exists at least 1 peak on the left
-            # hence, we will go left, r = m-1
-            # (if m is at the very end, it's a peak)
-            if m == n - 1 or nums[m] > nums[m + 1]:
-                ans = m    # This could be the peak! Save it.
-                r = m - 1  # Now see if there's a peak even further to the left.
-            else: # upward slope
-                l = m + 1  # Slope is going up, peak MUST be to the right.
-                
-        return ans
+            if nums[m] < nums[m + 1]:
+                l = m + 1
+            else:
+                r = m 
+        return l
 
 
 # Test cases
