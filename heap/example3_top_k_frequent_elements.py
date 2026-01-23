@@ -13,7 +13,6 @@ Output: [1]
 """
 
 import heapq
-from collections import Counter
 
 class Solution:
     def topKFrequent(self, nums, k):
@@ -22,15 +21,19 @@ class Solution:
         Time Complexity: O(n log k)
         Space Complexity: O(n)
         """
-        count = Counter(nums) # use counter to get freq per number. useful
+        counterMap = defaultdict(int)
+        for num in nums:
+            counterMap[num] += 1
+        
         heap = []
+        for num, cnt in counterMap.items():
+            heapq.heappush(heap, (-cnt, num))
         
-        for num, freq in count.items():
-            heapq.heappush(heap, (freq, num))
-            if len(heap) > k:
-                heapq.heappop(heap)
-        
-        return [num for (_, num) in heap]
+        res = []
+        for i in range(k):
+            cnt_neg, num = heapq.heappop(heap)
+            res.append(num)
+        return res
 
 # Test cases
 def test_top_k_frequent():

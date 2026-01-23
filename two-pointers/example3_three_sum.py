@@ -24,41 +24,25 @@ Explanation: The only possible triplet sums up to 0.
 """
 
 class Solution:
-    def threeSum(self, nums):
-        """
-        Sort + Two pointers
-        Time Complexity: O(n^2)
-        Space Complexity: O(1) excluding output
-        """
-        nums.sort()
-        result = []
-        
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        nums = sorted(nums)
+        res = set()
+
         for i in range(len(nums) - 2):
-            # Skip duplicates for first number
-            if i > 0 and nums[i] == nums[i - 1]:
-                continue
-            
-            left = i + 1
-            right = len(nums) - 1
-            
-            while left < right:
-                current_sum = nums[i] + nums[left] + nums[right]
-                
-                if current_sum == 0:
-                    result.append([nums[i], nums[left], nums[right]])
-                    # Skip duplicates
-                    while left < right and nums[left] == nums[left + 1]:
-                        left += 1
-                    while left < right and nums[right] == nums[right - 1]:
-                        right -= 1
-                    left += 1
-                    right -= 1
-                elif current_sum < 0:
-                    left += 1
+            j = i + 1
+            k = len(nums) - 1
+            while j < k:
+                total = nums[i] + nums[j] + nums[k]
+                if total == 0:
+                    res.add((nums[i], nums[j], nums[k]))
+                    j += 1
+                    k -= 1
+                elif total < 0:
+                    j += 1
                 else:
-                    right -= 1
-        
-        return result
+                    k -= 1
+        return list(res)
+
 
 
 # Test cases
