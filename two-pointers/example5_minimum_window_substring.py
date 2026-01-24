@@ -20,58 +20,41 @@ Output: ""
 Explanation: Both 'a's from t must be included in the window. Since the largest window of s only has one 'a', return empty string.
 """
 
-from collections import Counter
+from collections import defaultdict
 
 class Solution:
-    def minWindow(self, s, t):
-        """
-        Sliding window with two pointers and hash map
-        Time Complexity: O(|s| + |t|)
-        Space Complexity: O(|s| + |t|)
-        """
-        if not s or not t or len(s) < len(t):
+    def minWindow(self, s: str, t: str) -> str:
+        if s == "" or t == "" or len(s) < len(t):
             return ""
-        
-        # Count characters in t
-        need = Counter(t)
-        need_count = len(need)
-        
-        # Track current window
-        have = {}
-        have_count = 0
-        
-        left = 0
-        min_len = float('inf')
-        min_start = 0
-        
-        for right in range(len(s)):
-            char = s[right]
-            
-            # Expand window
-            if char in need:
-                have[char] = have.get(char, 0) + 1
-                if have[char] == need[char]:
-                    have_count += 1
-            
-            # Shrink window when valid
-            while have_count == need_count:
-                # Update minimum window
-                window_len = right - left + 1
-                if window_len < min_len:
-                    min_len = window_len
-                    min_start = left
-                
-                # Remove left character
-                left_char = s[left]
-                if left_char in need:
-                    if have[left_char] == need[left_char]:
-                        have_count -= 1
-                    have[left_char] -= 1
-                
-                left += 1
-        
-        return s[min_start:min_start + min_len] if min_len != float('inf') else ""
 
+        def reachCount(need, have):
+            for k, v in need.items():
+                if have[k] < v:
+                    return False
+            return True
+        
+        need = defaultdict(int)
+
+        for c in t:
+            need[c] += 1
+        
+        have = defaultdict(int)
+        min_window = ""
+
+        l = 0
+        for r in range(len(s)):
+            c = s[r]
+            if c in need:
+                have[c] += 1
+            
+            while reachCount(need, have):
+                current_window = s[l:r+1]
+                if min_window == "" or len(current_window) < len(min_window):
+                    min_window = current_window
+                have[s[l]] -= 1
+                l += 1
+            
+        return min_window
 
 # Test cases
 def test_min_window():
