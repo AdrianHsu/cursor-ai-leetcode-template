@@ -5,6 +5,43 @@ from typing import Dict
 from pydantic import BaseModel
 import pytest
 
+# No Pydantic version:
+
+# # --- Global State (In a real app, this could be passed as an argument) ---
+# DEVICE_STATES = {}
+# EVENT_QUEUE = asyncio.Queue()
+
+# # --- Logic Functions ---
+
+# def determine_status(temperature, battery_level):
+#     """Pure logic function using primitive types."""
+#     if temperature > 80.0:
+#         return "ERROR"
+#     elif battery_level < 0.1:
+#         return "OFFLINE"
+#     return "ONLINE"
+
+# async def process_event(event):
+#     """Updates the global state based on the event dictionary."""
+#     device_id = event["device_id"]
+#     new_status = determine_status(event["temperature"], event["battery_level"])
+    
+#     # Update global state
+#     DEVICE_STATES[device_id] = new_status
+#     print(f"  [Logic] {device_id} is now {new_status}")
+
+# async def worker():
+#     """The consumer loop."""
+#     print("🚀 Worker started...")
+#     while True:
+#         # get() pops the dict from the queue
+#         event = await EVENT_QUEUE.get()
+        
+#         await process_event(event)
+        
+#         # Mark as done so queue.join() works
+#         EVENT_QUEUE.task_done()
+
 # ==========================================
 # Part 1: Implementation
 # ==========================================
